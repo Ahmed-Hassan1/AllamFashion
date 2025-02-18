@@ -6,22 +6,17 @@
     <h1>New Arrivals</h1>
 </div>
 <div class="bar">
-    <div class="filters-bar">
+    <div class="filters-bar-container">
         <form action="{% url 'new-arrivals' %}" method="get" name="filterForm" id="filter">
-            <label class="filters-toolbar-label select-labe" for="SortBy">Sort by</label>
+            <label class="filters-toolbar-label select-labe" for="SortBy">ترتيب حسب</label>
             <select name="filter_by" onchange='document.filterForm.submit();'>
-                <option value="manual" {% if sort == 'manual' %}selected{% endif %}>Featured</option>
-                <!-- <option value='best-selling' {% if sort == 'best-selling' %}selected{% endif %}>Best selling</option> -->
-                <!-- <option value="A-Z" {% if sort == 'A-Z' %}selected{% endif %}>Alphabetically, A-Z</option> -->
-                <!-- <option value="Z-A" {% if sort == 'Z-A' %}selected{% endif %}>Alphabetically, Z-A</option> -->
-                <option value="LowToHigh" {% if sort == 'LowToHigh' %}selected{% endif %}>Price, low to high</option>
-                <option value="HighToLow" {% if sort == 'HighToLow' %}selected{% endif %}>Price, high to low</option>
-                <!-- <option value="created-ascending" {% if sort == 'created-ascending' %}selected{% endif %}>Date, old to new</option>
-                <option value="created-descending" {% if sort == 'created-descending' %}selected{% endif %}>Date, new to old</option> -->
+                <option value="manual" {% if sort == 'manual' %}selected{% endif %}>عرض</option>
+                <option value="LowToHigh" {% if sort == 'LowToHigh' %}selected{% endif %}>السعر من اقل لأعلى</option>
+                <option value="HighToLow" {% if sort == 'HighToLow' %}selected{% endif %}>السعر من اعلى لأقل</option>
             </select>
         </form>
     </div>
-    <span class="filters-toolbar-product-count">{{count}} products</span>
+    <span class="filters-toolbar-product-count">{{count}} منتج</span>
 </div>
 <div class="grid-container">
     {% for prod in page_obj %}
@@ -37,21 +32,21 @@
             </div>
             <div class="overlay"></div>
             <div class="product-card-title">{{prod.name}}</div>
-            <span class="price-item"> €{{prod.price}} </span>
+            <span class="price-item"> LE {{prod.price}} </span>
         </div>
     {% endfor %}
 </div>
 
 <div class="pagination">
     <!-- <div class="icon-arrow-right icon-arrow">←</div> -->
+    {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}&filter_by={{sort}}" class="icon-arrow-left icon-arrow">→</a>
+            <!-- <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a> -->
+    {% endif %}
+    <div class="pagination-text">صفحة <span>{{ page_obj.number }}</span> من <span>{{ page_obj.paginator.num_pages }}</span></div>
     {% if page_obj.has_previous %}
             <!-- <a href="?page=1" class="icon-arrow-right icon-arrow">&laquo; first</a> -->
-            <a href="?page={{ page_obj.previous_page_number }}&filter_by={{sort}}">←</a>
-    {% endif %}
-    <div class="pagination-text">Page <span>{{ page_obj.number }}</span> of <span>{{ page_obj.paginator.num_pages }}</span></div>
-    {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}&filter_by={{sort}}">→</a>
-            <!-- <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a> -->
+            <a href="?page={{ page_obj.previous_page_number }}&filter_by={{sort}}" class="icon-arrow-right icon-arrow">←</a>
     {% endif %}
     <!-- <div class="icon-arrow-left icon-arrow">→</div> -->
 </div>

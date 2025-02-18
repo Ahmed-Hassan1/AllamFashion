@@ -19,57 +19,37 @@
             </div>
             <div class="overlay"></div>
             <div class="product-card-title">{{prod.name}}</div>
-            <span class="price-item"> €{{prod.price}} </span>
+            <span class="price-item"> LE {{prod.price}} </span>
         </div>
         {% endfor %}
     </div>
-    <a class="View-all" href="{% url 'new-arrivals' %}">View all</a>
+    <a class="View-all" href="{% url 'new-arrivals' %}">اعرض الكل</a>
 </div>
 <div class="collection">
     <!-- <h2>50% OFF EVERYTHING</h2> -->
-    <div class="grid-carousel-container">
-        {% for prod in products %}
-        <div class="carousel-card">
-            <div>
-                <img
-                    class="carousel-image"
-                    src="{{prod.image.url}}"
-                    alt="{{prod.name}}" />
+     <div class="swiper mySwiper">
+        <div class="grid-carousel-container swiper-wrapper">
+            {% for prod in allProducts %}
+            <div class="carousel-card swiper-slide">
+                <a href="{% url 'product' prod.slug %}" class="card-anchor">
+                    <span class="visually-hidden">{{prod.name}}</span>
+                </a>
+                <div>
+                    <img
+                        class="grid-image"
+                        src="{{prod.image.url}}"
+                        alt="{{prod.name}}" />
+                </div>
+                <div class="overlay"></div>
+                <div class="product-card-title">{{prod.name}}</div>
+                <span class="price-item"> LE {{prod.price}} </span>
             </div>
-
-            <div class="carousel-card-title">{{prod.name}}</div>
-            <span class="price-item"> €{{prod.price}} </span>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
-    <div class="slider-container">
-        <div class="slider-buttons">
-            <button class="slider1" style="width: 15px">
-                <svg viewBox="0 0 10 6">
-                    <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z"
-                        fill="currentColor"></path>
-                </svg>
-            </button>
-            <!-- <div class="slider-counter">
-                <span class="slider-counter-current">1</span>
-                <span> / </span>
-                <span class="visually-hidden">of</span>
-                <span class="slider-counter-total">16</span>
-            </div> -->
-            <button class="slider2" style="width: 15px">
-                <svg viewBox="0 0 10 6">
-                    <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z"
-                        fill="currentColor"></path>
-                </svg>
-            </button>
-        </div>
-    </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+     </div>
 </div>
 <div class="feature">
     <img
@@ -86,4 +66,29 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 2,
+      spaceBetween: 5,
+    //   slidesOffsetAfter:0,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        type:'fraction',
+      },
+    //   loop:true,
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+
+    breakpoints:{
+        800: {
+      slidesPerView: 3,
+      spaceBetween: 30
+    }
+    }
+    });
+  </script>
 {% endblock content %}

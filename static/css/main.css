@@ -342,9 +342,9 @@ input {
     padding: 5px 55px;
 }
 .collection {
-    padding: 55px;
+    padding: 15px;
 }
-.grid-carousel-container {
+/* .grid-carousel-container {
     display: flex;
     justify-content: center;
     margin: 10%;
@@ -359,7 +359,7 @@ input {
     flex-direction: column;
     justify-content: space-between;
     gap: 20px;
-}
+} */
 
 .slider1 {
     rotate: 90deg;

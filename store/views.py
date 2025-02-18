@@ -6,12 +6,12 @@ from random import randint
 # Create your views here.
 
 def homePage(request):
-
+    allProducts = Product.objects.all()
     products  = Product.objects.all().order_by('-pk').filter(isNew=True)[:12]
 
     homeInfo = HomePage.objects.get()
 
-    context={'products':products,'homeInfo':homeInfo}
+    context={'products':products,'homeInfo':homeInfo,'allProducts':allProducts}
     return render(request,"store/home.html",context)
 
 def newArriavalPage(request):
@@ -19,7 +19,7 @@ def newArriavalPage(request):
     
     productsNew  = SortingProducts(sortType,True)
 
-    paginator = Paginator(productsNew, 5)
+    paginator = Paginator(productsNew, 4)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
@@ -34,7 +34,7 @@ def CollectionsPage(request,pk):
 
     productsNew  = SortingProducts(sortType,False,subs)
 
-    paginator = Paginator(productsNew, 5)
+    paginator = Paginator(productsNew, 16)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     

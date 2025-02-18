@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>conquista</title>
         <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     </head>
     <body>
         <header>
@@ -13,10 +14,10 @@
                 <img src="{% static 'images/logo.webp' %}" alt="" />
             </a>
             <nav>
-                <a href="{% url 'home' %}">Home</a>
-                <a href="{% url 'new-arrivals' %}">New Arrivals</a>
+                <a href="{% url 'home' %}">الرئيسية</a>
+                <a href="{% url 'new-arrivals' %}">الجديد</a>
                 <li class="dropdown">
-                    <a href="#" id="dropBtn">Shop</a>
+                    <a href="#" id="dropBtn">المتجر</a>
                     <ul class="submenu" id="dropMenu">
                         {% for item in menu_items %}
                         <li><a href="{% url 'collection' item.name %}">{{item.name}}</a></li>
@@ -75,15 +76,15 @@
             <div class="main-footer">
                 <div class="footer-content">
                     <div class="footer-linklist">
-                        <a href="{% url 'company' %}"> Company </a>
-                        <a href="{% url 'about-us' %}"> About Us </a>
-                        <a href="{% url 'contact' %}"> Contact </a>
+                        <a href="{% url 'company' %}"> الشركة </a>
+                        <a href="{% url 'about-us' %}"> من نحن </a>
+                        <a href="{% url 'contact' %}"> تواصل معنا </a>
                     </div>
                     <div class="footer-linklist">
-                        <a href="{% url 'terms' %}"> Terms of Use </a>
-                        <a href="{% url 'privacy' %}"> Privacy Information </a>
-                        <a href="{% url 'policy' %}"> Store Policies </a>
-                        <a href="{% url 'wholesale' %}"> Wholesale </a>
+                        <a href="{% url 'terms' %}"> شروط الاستخدام </a>
+                        <a href="{% url 'privacy' %}"> سرية المعلومات </a>
+                        <a href="{% url 'policy' %}"> قواعد المتجر </a>
+                        <a href="{% url 'wholesale' %}"> الجملة </a>
                     </div>
                 </div>
                 <!-- <form>
@@ -99,14 +100,14 @@
             </div>
             <hr class="site-footer__hr" />
             <div class="social-icons">
-                <a class="social-icon-facebook" href="https://www.facebook.com/conquistafashion/">
+                <a class="social-icon-facebook" href="https://www.facebook.com/">
                     <svg viewBox="0 0 20 20">
                         <path
                             fill="#444"
                             d="M18.05.811q.439 0 .744.305t.305.744v16.637q0 .439-.305.744t-.744.305h-4.732v-7.221h2.415l.342-2.854h-2.757v-1.83q0-.659.293-1t1.073-.342h1.488V3.762q-.976-.098-2.171-.098-1.634 0-2.635.964t-1 2.72V9.47H7.951v2.854h2.415v7.221H1.413q-.439 0-.744-.305t-.305-.744V1.859q0-.439.305-.744T1.413.81H18.05z"></path>
                     </svg>
                 </a>
-                <a class="social-icon-instagram" href="https://www.instagram.com/conquista_fashion">
+                <a class="social-icon-instagram" href="https://www.instagram.com/">
                     <svg viewBox="0 0 512 512">
                         <path
                             fill="#444"
@@ -118,9 +119,6 @@
                     </svg>
                 </a>
             </div>
-            <small class="copyright-content"
-                >© 2025, <a href="/" title="">Conquista-Fashion</a></small
-            >
         </footer>
         <script src="{% static 'js/main.js' %}"></script>
     </body>

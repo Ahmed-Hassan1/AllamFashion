@@ -1,0 +1,14 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="contact-container">
+    <h1>Contact</h1>
+    <div class="rte">
+        <div style="text-align: center">{{info.Address}}</div>
+        <div style="text-align: center">{{info.Phonenumber}}</div>
+        <div style="text-align: center">{{info.Email}}</div>
+    </div>
+</div>
+
+{% endblock content %}

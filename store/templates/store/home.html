@@ -1,0 +1,89 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="main-container">
+    <h2>{{homeInfo.HomePageSeasonTitle}}</h2>
+
+    <div class="grid-container">
+        {% for prod in products %}
+        <div class="product-card">
+            <a href="{% url 'product' prod.slug %}" class="card-anchor">
+                <span class="visually-hidden">{{prod.name}}</span>
+            </a>
+            <div>
+                <img
+                    class="grid-image"
+                    src="{{prod.image.url}}"
+                    alt="{{prod.name}}" />
+            </div>
+            <div class="overlay"></div>
+            <div class="product-card-title">{{prod.name}}</div>
+            <span class="price-item"> €{{prod.price}} </span>
+        </div>
+        {% endfor %}
+    </div>
+    <a class="View-all" href="{% url 'new-arrivals' %}">View all</a>
+</div>
+<div class="collection">
+    <!-- <h2>50% OFF EVERYTHING</h2> -->
+    <div class="grid-carousel-container">
+        {% for prod in products %}
+        <div class="carousel-card">
+            <div>
+                <img
+                    class="carousel-image"
+                    src="{{prod.image.url}}"
+                    alt="{{prod.name}}" />
+            </div>
+
+            <div class="carousel-card-title">{{prod.name}}</div>
+            <span class="price-item"> €{{prod.price}} </span>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="slider-container">
+        <div class="slider-buttons">
+            <button class="slider1" style="width: 15px">
+                <svg viewBox="0 0 10 6">
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z"
+                        fill="currentColor"></path>
+                </svg>
+            </button>
+            <!-- <div class="slider-counter">
+                <span class="slider-counter-current">1</span>
+                <span> / </span>
+                <span class="visually-hidden">of</span>
+                <span class="slider-counter-total">16</span>
+            </div> -->
+            <button class="slider2" style="width: 15px">
+                <svg viewBox="0 0 10 6">
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z"
+                        fill="currentColor"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="feature">
+    <img
+        class="feature-image"
+        src="{{homeInfo.HomePageImage.url}}"
+        data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+        data-aspectratio="1.0"
+        data-sizes="auto" />
+    <div class="feature-text">
+        <h2 class="feature-h2">{{homeInfo.HomePageImageTitle}}</h2>
+        <p class="feature-p">
+            {{homeInfo.HomePageParagraph}}
+        </p>
+    </div>
+</div>
+
+{% endblock content %}

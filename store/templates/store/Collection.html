@@ -1,0 +1,48 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+<div class="title">
+    <h1>{{subs.name}}</h1>
+</div>
+<div class="bar">
+    <div class="filters-bar-container">
+        <form action="{% url 'collection' subs.name %}" method="get" name="filterForm" id="filter">
+            <label class="filters-toolbar-label select-labe" for="SortBy">Sort by</label>
+            <select name="filter_by" onchange='document.filterForm.submit();'>
+                <option value="manual" {% if sort == 'manual' %}selected{% endif %}>Featured</option>
+                <option value="LowToHigh" {% if sort == 'LowToHigh' %}selected{% endif %}>Price, low to high</option>
+                <option value="HighToLow" {% if sort == 'HighToLow' %}selected{% endif %}>Price, high to low</option>
+            </select>
+        </form>
+    </div>
+    <span class="filters-toolbar-product-count">{{count}} products</span>
+</div>
+<div class="grid-container">
+    {% for prod in page_obj %}
+        <div class="product-card">
+            <a href="{% url 'product' prod.slug %}" class="card-anchor">
+                <span class="visually-hidden">{{prod.name}}</span>
+            </a>
+            <div>
+                <img
+                    class="grid-image"
+                    src="{{prod.image.url}}"
+                    alt="{{prod.name}}" />
+            </div>
+            <div class="overlay"></div>
+            <div class="product-card-title">{{prod.name}}</div>
+            <span class="price-item"> €{{prod.price}} </span>
+        </div>
+    {% endfor %}
+</div>
+<div class="pagination">
+    {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}&filter_by={{sort}}">←</a>
+    {% endif %}
+    <div class="pagination-text">Page <span>{{ page_obj.number }}</span> of <span>{{ page_obj.paginator.num_pages }}</span></div>
+    {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}&filter_by={{sort}}">→</a>
+    {% endif %}
+</div>
+
+{% endblock content %}

@@ -1,0 +1,70 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="main">
+    <div class="product">
+        <div class="product-single">
+            <img
+                class="zoomImg"
+                src="{{product.image.url}}" />
+        </div>
+        <!-- <div class="presentation-contaienr">
+            <img
+                class="presentation"
+                src="//conquista-fashion.com/cdn/shop/products/C221-122-11-A_diqihp_110x110@2x.jpg?v=1657213412"
+                alt="" />
+            <img
+                class="presentation"
+                src="//conquista-fashion.com/cdn/shop/products/C221-122-11-2_300x300.jpg?v=1657213412" />
+            <img
+                class="presentation"
+                src=" //conquista-fashion.com/cdn/shop/products/C221-122-11-3_300x300.jpg?v=1657213412"
+                alt="" />
+            <img
+                class="presentation"
+                src="//conquista-fashion.com/cdn/shop/products/C221-122-11-4_300x300.jpg?v=1657213412"
+                alt="" />
+            <img
+                class="presentation"
+                src="//conquista-fashion.com/cdn/shop/products/C221-122-11-5_300x300.jpg?v=1657213412"
+                alt="" />
+            <img
+                class="presentation"
+                src="//conquista-fashion.com/cdn/shop/products/C221-122-11-6_300x300.jpg?v=1657213412"
+                alt="" />
+        </div> -->
+    </div>
+    <div class="text">
+        <h1 class="product-title" style="margin-bottom: 10px;">{{product.name}}</h1>
+        <span class="price-item"> €{{product.price}} </span>
+        <p style="margin-top: 25px;">
+            This summer midi dress is crafted in fuchsia woven stretch poplin style fabric.
+            It has short sleeves with drop shoulders. It has a deep V neckline and a
+            vertical seam in the front. There is a belt in the same fabric for the perfect
+            waistline. The hem is slightly rounded. It is styled in a relaxed A line.
+        </p>
+    </div>
+</div>
+<div class="title">
+    <h2>You may also like</h2>
+</div>
+<div class="suggest grid-container">
+    {% for prod in rands %}
+    <div class="product-card">
+            <a href="{% url 'product' prod.slug %}" class="card-anchor">
+                <span class="visually-hidden">{{prod.name}}</span>
+            </a>
+            <div>
+                <img
+                    class="grid-image"
+                    src="{{prod.image.url}}"
+                    alt="{{prod.name}}" />
+            </div>
+            <div class="product-card-title">{{prod.name}}</div>
+            <span class="price-item"> €{{prod.price}} </span>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}

@@ -18,8 +18,10 @@
                     alt="{{prod.name}}" />
             </div>
             <div class="overlay"></div>
-            <div class="product-card-title">{{prod.name}}</div>
-            <span class="price-item"> LE {{prod.price}} </span>
+            <div>
+                <div class="product-card-title">{{prod.name}}</div>
+                <span class="price-item"> LE {{prod.price}} </span>
+            </div>
         </div>
         {% endfor %}
     </div>
@@ -28,9 +30,9 @@
 <div class="collection">
     <!-- <h2>50% OFF EVERYTHING</h2> -->
      <div class="swiper mySwiper">
-        <div class="grid-carousel-container swiper-wrapper">
+        <div class="grid-carousel-container swiper-wrapper" style="flex-grow: inherit;">
             {% for prod in allProducts %}
-            <div class="carousel-card swiper-slide">
+            <div class="carousel-card swiper-slide" style="display: flex; flex-direction: column; justify-content: space-between;">
                 <a href="{% url 'product' prod.slug %}" class="card-anchor">
                     <span class="visually-hidden">{{prod.name}}</span>
                 </a>
@@ -41,15 +43,39 @@
                         alt="{{prod.name}}" />
                 </div>
                 <div class="overlay"></div>
-                <div class="product-card-title">{{prod.name}}</div>
-                <span class="price-item"> LE {{prod.price}} </span>
+                <div>
+                    <div class="product-card-title">{{prod.name}}</div>
+                    <span class="price-item"> LE {{prod.price}} </span>
+                </div>
             </div>
             {% endfor %}
         </div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-pagination"></div>
      </div>
+     <div class="slider-container">
+        <div class="slider-buttons">
+            <button class="slider2" style="width: 15px">
+                <svg viewBox="0 0 10 6">
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z"
+                        fill="currentColor"></path>
+                </svg>
+            </button>
+            <div class="swiper-pagination" style="position:inherit;"></div>
+            
+
+            <button class="slider1" style="width: 15px">
+                <svg viewBox="0 0 10 6">
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z"
+                        fill="currentColor"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
 </div>
 <div class="feature">
     <img
@@ -72,15 +98,16 @@
       slidesPerView: 2,
       spaceBetween: 5,
     //   slidesOffsetAfter:0,
+    centeredSlides:true,
       pagination: {
         el: ".swiper-pagination",
         clickable: true,
         type:'fraction',
       },
-    //   loop:true,
+      loop:true,
     navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
+        nextEl: ".slider2",
+        prevEl: ".slider1",
       },
 
     breakpoints:{

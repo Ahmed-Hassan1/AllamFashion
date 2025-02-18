@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     /* border: solid, red, 1px; */
-    /* user-select: none; */
+    user-select: none;
 }
 a {
     text-decoration: none;
@@ -83,7 +83,7 @@ li::marker {
 }
 
 .submenu {
-    display: none;
+    /* display: none; */
     position: absolute;
     top: 100%;
     right: 0;
@@ -101,10 +101,10 @@ li::marker {
     margin: 10px 0;
 }
 .submenu2 {
-    display: none;
-    /* position: absolute; */
-    /* top: 100%; */
-    /* right: 0; */
+    /* display: none; */
+    position: absolute;
+    top: 100%;
+    right: 0;
     background: #ffffff;
     width: 100%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -160,9 +160,6 @@ h2 {
     font-weight: 600;
 }
 
-.product{
-    width: 50%;
-}
 .product-card {
     position: relative;
     width: 80%;
@@ -171,7 +168,6 @@ h2 {
     flex-direction: column;
     justify-content: space-between;
     gap: 20px;
-    margin: 50px;
 }
 
 .overlay {
@@ -191,24 +187,6 @@ h2 {
 .product-card:hover .product-card-title {
     text-decoration: underline;
     color: #000000;
-}
-.card-anchor{
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 2;
-}
-.visually-hidden{
-    position: absolute;
-    overflow: hidden;
-    clip: rect(0,0,0,0);
-    height: 1px;
-    width: 1px;
-    margin: -1px;
-    padding: 0;
-    border: 0;
 }
 .View-all {
     padding: 10px 18px;
@@ -343,10 +321,9 @@ input {
     padding: 5px 55px;
 }
 .collection {
-    /* padding: 55px; */
-    margin: 0 25% 0 25%;
+    padding: 55px;
 }
-/* .grid-carousel-container {
+.grid-carousel-container {
     display: flex;
     justify-content: center;
     margin: 10%;
@@ -361,7 +338,7 @@ input {
     flex-direction: column;
     justify-content: space-between;
     gap: 20px;
-} */
+}
 
 .slider1 {
     rotate: 90deg;
@@ -402,9 +379,6 @@ input {
 }
 .presentation {
     width: 100px;
-}
-.text{
-    width: 50%;
 }
 .text p {
     color: #69727b;
@@ -492,9 +466,6 @@ select {
     max-width: 180px;
 }
 @media (max-width: 750px) {
-    .collection{
-        margin: 0;
-    }
     .grid-container {
         grid-template-columns: repeat(2, 1fr);
         padding-inline-start: 22px;
@@ -568,17 +539,5 @@ select {
     .pagination {
         padding: 40px;
         gap: 5px;
-    }
-
-    .product{
-        width: 100%;
-    }
-
-    .text{
-        width: 100%;
-    }
-
-    .product-card{
-        margin: 10px;
     }
 }

@@ -1,10 +1,18 @@
-from .models import Category
+from .models import Category,WebSiteInfo,Order
 import json
 
 def store_menu(request):
     menu_items = Category.objects.all()
 
-    return {'menu_items':menu_items}
+    logo = logoURL()
+    return {'menu_items':menu_items,'logo':logo}
+
+def logoURL():
+    try:
+        logo = WebSiteInfo.objects.get().Logo.url
+        return logo
+    except:
+        return ''
 
 # def cart_badge(request):
 #     if request.user.is_authenticated and request.user.is_customer:

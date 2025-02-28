@@ -5,47 +5,71 @@
 <div class="main">
     <div class="product">
         <div class="product-single">
-            <img
-                class="zoomImg"
-                src="{{product.image.url}}" />
+            <img class="zoomImg" src="{{product.image.url}}"/>
         </div>
-        <!-- <div class="presentation-contaienr">
-            <img
-                class="presentation"
-                src="//conquista-fashion.com/cdn/shop/products/C221-122-11-A_diqihp_110x110@2x.jpg?v=1657213412"
-                alt="" />
-            <img
-                class="presentation"
-                src="//conquista-fashion.com/cdn/shop/products/C221-122-11-2_300x300.jpg?v=1657213412" />
-            <img
-                class="presentation"
-                src=" //conquista-fashion.com/cdn/shop/products/C221-122-11-3_300x300.jpg?v=1657213412"
-                alt="" />
-            <img
-                class="presentation"
-                src="//conquista-fashion.com/cdn/shop/products/C221-122-11-4_300x300.jpg?v=1657213412"
-                alt="" />
-            <img
-                class="presentation"
-                src="//conquista-fashion.com/cdn/shop/products/C221-122-11-5_300x300.jpg?v=1657213412"
-                alt="" />
-            <img
-                class="presentation"
-                src="//conquista-fashion.com/cdn/shop/products/C221-122-11-6_300x300.jpg?v=1657213412"
-                alt="" />
-        </div> -->
     </div>
     <div class="text">
-        <h1 class="product-title" style="margin-bottom: 10px;">{{product.name}}</h1>
-        <span class="price-item"> €{{product.price}} </span>
+        <!-- <h1 class="product-title" style="margin-bottom: 10px;">{{product.name}}</h1>
+        <span class="price-item"> جنيه مصرى {{product.price}} </span> -->
+
+        <h1 class="product-title">{{product.name}}</h1>
+        <div class="product-sale sale">sale</div>
+        <span class="price-item saleClass"> جنيه مصرى {{product.price}} </span>
+        <span class="price-item"> جنيه مصرى {{product.price}} </span>
+
+        <div class="product-form">
+            <div class="product-form-item">
+                <label style="font-size: 1.5rem;">المقاس</label>
+                <select class="option-selector-product">
+                    <option value="sm" selected>s</option>
+                    <option value="lg">l</option>
+                    <option value="xlg">xl</option>
+                </select>
+            </div>
+            <!-- <div class="product-form-item">
+                <label>color</label>
+                <select class="option-selector-product">
+                    <option value="">red</option>
+                    <option value="">gray</option>
+                    <option value="">orang</option>
+                </select>
+            </div> -->
+        </div>
+        <!-- <button type="submit" aria-label="Add to cart" class="product-form-cart-submit">
+            <span> Add to cart </span>
+        </button> -->
+        <button type="submit" data-product="{{product.id}}" data-action="add" data-bs-toggle="modal" data-bs-target="#exampleModal" class="product-form-cart-submit update-cart">
+            Add to Cart
+        </button>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body text-center">
+                  تم الاضافة للسلة بنجاح  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="green" class="bi bi-check-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <button type="submit" aria-label="check out" class="product-form-cart-checkout">
+            <span> Check Out </span>
+        </button>
+        <div class="pay-option">
+            <img src="{% static 'images/visa.jpg' %}" alt="" />
+            <img src="{% static 'images/instaPay.jpg' %}" alt="" />
+            <img src="{% static 'images/cash.jpg' %}" alt="" />
+        </div>
+
         <p style="margin-top: 25px;">
-            This summer midi dress is crafted in fuchsia woven stretch poplin style fabric.
-            It has short sleeves with drop shoulders. It has a deep V neckline and a
-            vertical seam in the front. There is a belt in the same fabric for the perfect
-            waistline. The hem is slightly rounded. It is styled in a relaxed A line.
+            {{product.desc|default_if_none:""}}
         </p>
     </div>
 </div>
+
 <div class="title">
     <h2>You may also like</h2>
 </div>
@@ -61,8 +85,10 @@
                     src="{{prod.image.url}}"
                     alt="{{prod.name}}" />
             </div>
-            <div class="product-card-title">{{prod.name}}</div>
-            <span class="price-item"> €{{prod.price}} </span>
+            <div>
+                <div class="product-card-title">{{prod.name}}</div>
+                <span class="price-item">جنيه مصرى {{prod.price}} </span>
+            </div>
         </div>
     {% endfor %}
 </div>

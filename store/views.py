@@ -19,7 +19,7 @@ def newArriavalPage(request):
     
     productsNew  = SortingProducts(sortType,True)
 
-    paginator = Paginator(productsNew, 4)
+    paginator = Paginator(productsNew, 16)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 

@@ -9,9 +9,18 @@ class HomePage(models.Model):
     HomePageParagraph = models.TextField(blank=True,null=True)
 
 class WebSiteInfo(models.Model):
+    Logo = models.ImageField(null=True,blank=True)
     Address=models.CharField(max_length=250,blank=True,null=True)
     PhoneNumber=models.CharField(max_length=250,blank=True,null=True)
     Email=models.CharField(max_length=250,blank=True,null=True)
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.Logo.url
+        except:
+            url = ''
+        return url
 
 class Category(models.Model):
     name = models.CharField(max_length=200,blank=True,null=True)

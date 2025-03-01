@@ -34,13 +34,14 @@ function addCookieItem(prodID,action,prodQuant)
     }
 
     if(action == 'remove'){
-        cart[prodID]['quantity'] -= 1;
+        delete cart[prodID];
+        // cart[prodID]['quantity'] = 0;
 
-        if (cart[prodID]['quantity']<=0)
-        {
-            console.log('deleted item')
-            delete cart[prodID];
-        }
+        // if (cart[prodID]['quantity']<=0)
+        // {
+        //     console.log('deleted item')
+        //     delete cart[prodID];
+        // }
         
     }
     console.log(cart)

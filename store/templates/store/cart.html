@@ -2,24 +2,16 @@
 {% load static %}
 {% block content %}
 <div class="cart-pag-container">
-    <h1>Your cart</h1>
-    <a href="{% url 'home' %}" class="text-link-accent"> Continue shopping </a>
+    <h1>سلة المشتريات</h1>
+    <!-- <a href="{% url 'home' %}" class="text-link-accent"> الاستمرار فى التسوق </a> -->
     <div class="table-head">
         <div>
-            <h3>Product</h3>
+            <h3>المنتج</h3>
         </div>
         <div class="info">
-            <h3>Price</h3>
-            <h3>Quantity</h3>
-            <h3>Total</h3>
-        </div>
-    </div>
-    <div class="table-head-mobv">
-        <div>
-            <h3>Product</h3>
-        </div>
-        <div>
-            <h3>Price</h3>
+            <h3>سعر المنتج</h3>
+            <h3>الكمية</h3>
+            <h3>الاجمالى</h3>
         </div>
     </div>
     {% for prod in orderitems%}
@@ -29,23 +21,27 @@
                 <img src="{{prod.product.url}}" alt="" class=""/>
             </div>
             <div class="cart-img-info">
-                <a href="#">{{prod.product.name}}</a>
-                <p>Size: S</p>
-                <a href="#" class="text-link-accent"> Remove </a>
+                <div>{{prod.product.name}}</div>
+                <p>المقاس</p>
+                <!-- <a href="#" class="text-link-accent"> Remove </a> -->
+                <button type="submit" data-product="{{prod.product.id}}" data-action="remove" data-bs-toggle="modal" data-bs-target="#exampleModal" class="product-form-cart-submit update-cart">
+                    Remove
+                </button>
             </div>
         </div>
         <div class="info">
             <div class="cart-price">جنيه مصرى {{prod.product.price}}</div>
-            <div>
+            <!-- <div>
                 <input class="cart-qty-input" type="number" value="{{prod.quantity}}" />
-            </div>
+            </div> -->
+            <div>{{prod.quantity}}</div>
             <div><span>جنيه مصرى {{prod.price}}</span></div>
         </div>
     </div>
     {% endfor %}
 </div>
 <div class="cart-footer">
-    <div class="discount-card">
+    <!-- <div class="discount-card">
         <div class="discount-cart">
             <span>Pre Sale Season</span>
             <svg class="icon-saletag">
@@ -55,12 +51,12 @@
             </svg>
         </div>
         <span class="discount-cart-total">€16,50<span>-</span></span>
-    </div>
+    </div> -->
     <div class="cart-subtotal">
-        <span class="cart-subtotal-title">Subtotal</span>
-        <span class="cart-subtotal-price">€38,50 EUR</span>
+        <span class="cart-subtotal-title">الاجمالى</span>
+        <span class="cart-subtotal-price">جنيه مصرى {{order.get_total_price}}</span>
     </div>
-    <div class="cart-shipping">Tax included and shipping calculated at checkout</div>
+    <!-- <div class="cart-shipping">Tax included and shipping calculated at checkout</div> -->
     <div class="cartsubmit-controls">
         <input type="submit" class="cart-submit" value="Check out" />
     </div>

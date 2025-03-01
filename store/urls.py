@@ -15,4 +15,6 @@ urlpatterns = [
     path('privacy/',PrivacyPage,name='privacy'),
     path('policy/',PolicyPage,name='policy'),
     path('wholesale/',WholesalePage,name='wholesale'),
+
+    path('cart/',cartView,name='cart'),
 ]

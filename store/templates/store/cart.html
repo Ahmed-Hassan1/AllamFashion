@@ -1,0 +1,73 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+<div class="cart-pag-container">
+    <h1>Your cart</h1>
+    <a href="{% url 'home' %}" class="text-link-accent"> Continue shopping </a>
+    <div class="table-head">
+        <div>
+            <h3>Product</h3>
+        </div>
+        <div class="info">
+            <h3>Price</h3>
+            <h3>Quantity</h3>
+            <h3>Total</h3>
+        </div>
+    </div>
+    <div class="table-head-mobv">
+        <div>
+            <h3>Product</h3>
+        </div>
+        <div>
+            <h3>Price</h3>
+        </div>
+    </div>
+    {% for prod in orderitems%}
+    <div class="cart-prduct-container">
+        <div class="cart-img-container">
+            <div class="cart-img">
+                <img src="{{prod.product.url}}" alt="" class=""/>
+            </div>
+            <div class="cart-img-info">
+                <a href="#">{{prod.product.name}}</a>
+                <p>Size: S</p>
+                <a href="#" class="text-link-accent"> Remove </a>
+            </div>
+        </div>
+        <div class="info">
+            <div class="cart-price">جنيه مصرى {{prod.product.price}}</div>
+            <div>
+                <input class="cart-qty-input" type="number" value="{{prod.quantity}}" />
+            </div>
+            <div><span>جنيه مصرى {{prod.price}}</span></div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="cart-footer">
+    <div class="discount-card">
+        <div class="discount-cart">
+            <span>Pre Sale Season</span>
+            <svg class="icon-saletag">
+                <path
+                    d="M10 3a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0-3H7a1 1 0 0 0-.71.29l-6 6a1 1 0 0 0 0 1.42l4 4a1 1 0 0 0 1.42 0c.19-.2 5.8-5.81 6-6A1 1 0 0 0 12 5V2a2 2 0 0 0-2-2z"
+                    fill="red"></path>
+            </svg>
+        </div>
+        <span class="discount-cart-total">€16,50<span>-</span></span>
+    </div>
+    <div class="cart-subtotal">
+        <span class="cart-subtotal-title">Subtotal</span>
+        <span class="cart-subtotal-price">€38,50 EUR</span>
+    </div>
+    <div class="cart-shipping">Tax included and shipping calculated at checkout</div>
+    <div class="cartsubmit-controls">
+        <input type="submit" class="cart-submit" value="Check out" />
+    </div>
+    <div class="cart-pay-option">
+        <img src="{% static 'images/visa.jpg' %}" alt="" />
+        <img src="{% static 'images/instaPay.jpg' %}" alt="" />
+        <img src="{% static 'images/cash.jpg' %}" alt="" />
+    </div>
+</div>
+{% endblock content %}

@@ -6,26 +6,23 @@ for (i=0; i<updateBtns.length; i++)
     updateBtns[i].addEventListener('click', function(){
         var prodID = this.dataset.product;
         var action = this.dataset.action;
-        var prodQuant = $('#qty_input').val();
-
-        if(prodQuant == undefined)
-        {
-            prodQuant=1
-        }
-
+        // if(prodQuant == undefined)
+        // {
+        //     prodQuant=1
+        // }
+        addCookieItem(prodID,action,1);
         if ( user === 'AnonymousUser')
         {
-            addCookieItem(prodID,action,prodQuant);
+            //addCookieItem(prodID,action,prodQuant);
+            console.log("Anon");
         }
-        else updateUserOrder(prodID,action,prodQuant);
+        //else updateUserOrder(prodID,action,prodQuant);
     })
 }
 
 function addCookieItem(prodID,action,prodQuant)
 {
-
-    if(action == 'add')
-    {
+    if(action == 'add'){
         if(cart[prodID] == undefined)
         {
             cart[prodID] = {'quantity':parseInt(prodQuant)};
@@ -36,8 +33,7 @@ function addCookieItem(prodID,action,prodQuant)
         }
     }
 
-    if(action == 'remove')
-    {
+    if(action == 'remove'){
         cart[prodID]['quantity'] -= 1;
 
         if (cart[prodID]['quantity']<=0)

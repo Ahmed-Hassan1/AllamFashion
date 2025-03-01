@@ -1,5 +1,7 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render
+from django.http import JsonResponse
+import json
 from .models import *
 
 from random import randint
@@ -119,3 +121,35 @@ def PolicyPage(request):
 def WholesalePage(request):
 
     return render(request,'store/Wholesale.html')
+
+
+#Cart
+def cartView(request):
+    
+    try:
+        cart = json.loads(request.COOKIES['cart'])
+    except:
+        cart = {}
+    orderitems=[]
+    order = {'get_total_items':0,'get_total_price':0}
+
+    for i in cart:
+        product =  Product.objects.get(id=i)
+        price = product.price * cart[i]['quantity']
+        order['get_total_price']+=price
+        order['get_total_items']+=cart[i]['quantity']
+
+        item = {
+            'product':{
+                'id':product.id,
+                'name':product.name,
+                'price':product.price,
+                'url':product.image.url
+            },
+            'quantity':cart[i]['quantity'],
+            'price': price,
+        }
+        orderitems.append(item)
+    
+    context = {'orderitems':orderitems, 'order':order}
+    return render(request,'store/cart.html',context)

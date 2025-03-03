@@ -10,59 +10,71 @@
     </div>
     <div class="text">
         <!-- <h1 class="product-title" style="margin-bottom: 10px;">{{product.name}}</h1>
-        <span class="price-item"> جنيه مصرى {{product.price}} </span> -->
+        <span class="price-item"> جم {{product.price}} </span> -->
 
         <h1 class="product-title">{{product.name}}</h1>
-        <div class="product-sale sale">sale</div>
-        <span class="price-item saleClass"> جنيه مصرى {{product.price}} </span>
-        <span class="price-item"> جنيه مصرى {{product.price}} </span>
 
-        <div class="product-form">
-            <div class="product-form-item">
-                <label style="font-size: 1.5rem;">المقاس</label>
-                <select class="option-selector-product">
-                    <option value="sm" selected>s</option>
-                    <option value="lg">l</option>
-                    <option value="xlg">xl</option>
-                </select>
-            </div>
-            <!-- <div class="product-form-item">
-                <label>color</label>
-                <select class="option-selector-product">
-                    <option value="">red</option>
-                    <option value="">gray</option>
-                    <option value="">orang</option>
-                </select>
-            </div> -->
-        </div>
-        <!-- <button type="submit" aria-label="Add to cart" class="product-form-cart-submit">
-            <span> Add to cart </span>
-        </button> -->
-        <button type="submit" data-product="{{product.id}}" data-action="add" data-bs-toggle="modal" data-bs-target="#exampleModal" class="product-form-cart-submit update-cart">
-            Add to Cart
-        </button>
+        {% if product.isSoldOut %}
+        <div class="product-sold-out">SOLD OUT</div>
+        {% else %}
+            {% if product.isOnSale %}
+            <div class="product-sale sale">SALE</div>
+            {% endif %}
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-body text-center">
-                  تم الاضافة للسلة بنجاح  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="green" class="bi bi-check-circle" viewBox="0 0 16 16">
-                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                    <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
-                  </svg>
+            {% if product.isOnSale %}
+            <span class="price-item saleClass"> جم {{product.SalePrice}} </span>
+            <span class="price-item"> جم {{product.price}} </span>
+            {% else %}
+            <span class="price-item"> جم {{product.price}} </span>
+            {% endif %}
+            <div class="product-form">
+                <div class="product-form-item">
+                    <label style="font-size: 1.5rem;">المقاس</label>
+                    <select class="option-selector-product">
+                        <option value="sm" selected>s</option>
+                        <option value="lg">l</option>
+                        <option value="xlg">xl</option>
+                    </select>
                 </div>
-              </div>
+                <!-- <div class="product-form-item">
+                    <label>color</label>
+                    <select class="option-selector-product">
+                        <option value="">red</option>
+                        <option value="">gray</option>
+                        <option value="">orang</option>
+                    </select>
+                </div> -->
             </div>
-        </div>
+            <!-- <button type="submit" aria-label="Add to cart" class="product-form-cart-submit">
+                <span> Add to cart </span>
+            </button> -->
+            <button type="submit" data-product="{{product.id}}" data-action="add" data-bs-toggle="modal" data-bs-target="#exampleModal" class="product-form-cart-submit update-cart">
+                Add to Cart
+            </button>
 
-        <button type="submit" aria-label="check out" class="product-form-cart-checkout">
-            <span> Check Out </span>
-        </button>
-        <div class="pay-option">
-            <img src="{% static 'images/visa.jpg' %}" alt="" />
-            <img src="{% static 'images/instaPay.jpg' %}" alt="" />
-            <img src="{% static 'images/cash.jpg' %}" alt="" />
-        </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                    تم الاضافة للسلة بنجاح  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="green" class="bi bi-check-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                    </svg>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <button type="submit" aria-label="check out" class="product-form-cart-checkout">
+                <span> Check Out </span>
+            </button>
+            <div class="pay-option">
+                <img src="{% static 'images/visa.jpg' %}" alt="" />
+                <img src="{% static 'images/instaPay.jpg' %}" alt="" />
+                <img src="{% static 'images/cash.jpg' %}" alt="" />
+            </div>
+        {% endif %}
+        
 
         <p style="margin-top: 25px;">
             {{product.desc|default_if_none:""}}
@@ -87,7 +99,7 @@
             </div>
             <div>
                 <div class="product-card-title">{{prod.name}}</div>
-                <span class="price-item">جنيه مصرى {{prod.price}}</span>
+                <span class="price-item">جم {{prod.price}}</span>
             </div>
         </div>
     {% endfor %}

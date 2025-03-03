@@ -30,12 +30,12 @@
             </div>
         </div>
         <div class="info">
-            <div class="cart-price">جنيه مصرى {{prod.product.price}}</div>
+            <div class="cart-price">جم {{prod.product.price}}</div>
             <!-- <div>
                 <input class="cart-qty-input" type="number" value="{{prod.quantity}}" />
             </div> -->
             <div>{{prod.quantity}}</div>
-            <div><span>جنيه مصرى {{prod.price}}</span></div>
+            <div><span>جم {{prod.price}}</span></div>
         </div>
     </div>
     {% endfor %}
@@ -54,7 +54,7 @@
     </div> -->
     <div class="cart-subtotal">
         <span class="cart-subtotal-title">الاجمالى</span>
-        <span class="cart-subtotal-price">جنيه مصرى {{order.get_total_price}}</span>
+        <span class="cart-subtotal-price">جم {{order.get_total_price}}</span>
     </div>
     <!-- <div class="cart-shipping">Tax included and shipping calculated at checkout</div> -->
     <div class="cartsubmit-controls">

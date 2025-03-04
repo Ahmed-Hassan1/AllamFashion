@@ -17,4 +17,6 @@ urlpatterns = [
     path('wholesale/',WholesalePage,name='wholesale'),
 
     path('cart/',cartView,name='cart'),
+    path('checkout/',CheckOut,name='checkout'),
+    path('complete/',CompletedOrder,name='complete'),
 ]

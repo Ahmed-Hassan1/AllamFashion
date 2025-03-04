@@ -88,7 +88,8 @@ def ProductPage(request,pk):
     random_profiles_id_list = random.sample(range(validIds), 4)
     RandomProds = Product.objects.filter(id__in=random_profiles_id_list)
 
-    context={'product':product,'subs':subs,'rands':RandomProds}
+
+    context={'product':product,'subs':subs,'rands':RandomProds,'sizes':product.size.all()}
     return render(request,'store/product.html',context)
 
 
@@ -135,7 +136,7 @@ def cartView(request):
 
     for i in cart:
         product =  Product.objects.get(id=i)
-        price = product.price * cart[i]['quantity']
+        price = product.SalePrice if product.isOnSale else product.price * cart[i]['quantity']
         order['get_total_price']+=price
         order['get_total_items']+=cart[i]['quantity']
 
@@ -143,8 +144,41 @@ def cartView(request):
             'product':{
                 'id':product.id,
                 'name':product.name,
-                'price':product.price,
+                'price':product.SalePrice if product.isOnSale else product.price,
                 'url':product.image.url
+            },
+            'quantity':cart[i]['quantity'],
+            'price': price,
+            'size':cart[i]['size']
+        }
+        orderitems.append(item)
+    
+    context = {'orderitems':orderitems, 'order':order}
+    return render(request,'store/cart.html',context)
+
+
+def CheckOut(request):
+
+    try:
+        cart = json.loads(request.COOKIES['cart'])
+    except:
+        cart = {}
+    orderitems=[]
+    order = {'get_total_items':0,'get_total_price':0}
+
+    for i in cart:
+        product =  Product.objects.get(id=i)
+        price = product.SalePrice if product.isOnSale else product.price * cart[i]['quantity']
+        order['get_total_price']+=price
+        order['get_total_items']+=cart[i]['quantity']
+
+        item = {
+            'product':{
+                'id':product.id,
+                'name':product.name,
+                'price':product.SalePrice if product.isOnSale else product.price,
+                'url':product.image.url,
+                'size':cart[i]['size']
             },
             'quantity':cart[i]['quantity'],
             'price': price,
@@ -152,4 +186,45 @@ def cartView(request):
         orderitems.append(item)
     
     context = {'orderitems':orderitems, 'order':order}
-    return render(request,'store/cart.html',context)
+    return render(request,'store/CheckOut.html',context)
+
+
+def CompletedOrder(request):
+    address = Address.objects.create(PhoneNumber=request.POST['phone'],name=request.POST['name'],address=request.POST['address'],address2=request.POST['apartment'],Governate=request.POST['province'],City=request.POST['city'],PhoneNumber2=request.POST['phone2'])
+    orderDB = Order.objects.create(Address=address)
+    try:
+        cart = json.loads(request.COOKIES['cart'])
+    except:
+        cart = {}
+    orderitems=[]
+    order = {'get_total_items':0,'get_total_price':0}
+
+    for i in cart:
+        product =  Product.objects.get(id=i)
+        price = product.SalePrice if product.isOnSale else product.price * cart[i]['quantity']
+        order['get_total_price']+=price
+        order['get_total_items']+=cart[i]['quantity']
+
+        item = {
+            'product':{
+                'id':product.id,
+                'name':product.name,
+                'price':product.SalePrice if product.isOnSale else product.price,
+                'url':product.image.url,
+                'size':cart[i]['size']
+            },
+            'quantity':cart[i]['quantity'],
+            'price': price,
+        }
+        orderitems.append(item)
+
+    for item in orderitems:
+        product = Product.objects.get(id=item['product']['id'])
+        orderItem = OrderItem.objects.create(
+            order=orderDB,
+            product=product,
+            quantity=item['quantity'],
+            price=item['price'],
+            size = item['product']['size']
+        )
+    return render(request,'store/Completed_Order.html')

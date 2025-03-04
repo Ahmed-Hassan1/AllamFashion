@@ -1,0 +1,14 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+<div class="empty-page-content">
+    <h1>تم الحجز بنجاح</h1>
+    <p class="cart-empty-message">سيتم التواصل معك لمتابعة الطلب</p>
+    <a href="{% url 'home' %}" class="cart-continue-btn">→ للاستمرار بالتسوق </a>
+</div>
+
+<script>
+    cart = {}
+    document.cookie = 'cart='+ JSON.stringify(cart) + ";domian=;path=/"
+</script>
+{% endblock content %}

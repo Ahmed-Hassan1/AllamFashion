@@ -1,0 +1,111 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+        <div class="checkout-container">
+            <div class="right-part">
+                <div>
+                    {% for prod in orderitems%}
+                    <div class="checkout-img-container">
+                        <div class="checkout-img-container2">
+                            <div class="checkout-img">
+                                <img src="{{prod.product.url}}" alt="" />
+                            </div>
+                            <div class="cart-img-info">
+                                <div>{{prod.product.name}}</div>
+                                <span style="color: rgb(168, 167, 167)">{{prod.quantity}}</span>
+                            </div>
+                            <div class="cart-price">جم {{prod.price}}</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="price-information">
+                    <div class="price-subtotal-title">
+                        <h3>الاجمالى</h3>
+                        <h3>جم {{order.get_total_price}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="left-part">
+                <form class="left-part-form" action="{% url 'complete' %}" method="post">
+                    {% csrf_token %}
+                    <div class="contact" style="margin-bottom: 20px;">
+                        <h3>Contact</h3>
+                        <input class="email-inp" name="phone" placeholder="رقم التليفون للتواصل" type="text" required/>
+                    </div>
+                    <div class="delivary">
+                        <div>
+                            <h3>Delivery</h3>
+                        </div>
+                        <div class="data">
+                            <div class="name">
+                                <input class="box" name="name" placeholder="الاسم كامل" type="text" required/>
+                            </div>
+                            <input class="box" name="address" placeholder="العنوان" type="text" required/>
+                            <input class="box" name="apartment" placeholder="تفاصيل اخرى للعنوان" type="text" />
+                            <div class="name">
+                                <input class="box" name="city" placeholder="المدينة" type="text" />
+                                <input class="box" name="province" placeholder="المحافظة" type="text" />
+                                <!-- <div class="countryCode">
+                                    <select name="countryCode">
+                                        <option value="0">المحافظة</option>
+                                        <option value="cairo">القاهرة</option>
+                                        <option value="giza">الجيزة</option>
+                                    </select>
+                                </div> -->
+                            </div>
+                            <div>
+                                <input class="box" name="phone2" placeholder="التليفون" type="text" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="Payment">
+                        <h3 class="">Payment</h3>
+                        <p class="">.All transactions are secure and encrypted</p>
+                    </div> -->
+                    <div class="pay-cont">
+                        <!-- <div class="Credit-card-cont">
+                            <input type="radio" name="basic" class="radio" />
+                            <label class="Credit-card">Credit card </label>
+                        </div>
+                        <div class="Credit-card-info">
+                            <input
+                                class="box"
+                                name="Card-number"
+                                placeholder="Card-number"
+                                type="text" />
+                            <div class="name">
+                                <input
+                                    class="box"
+                                    name="expiration"
+                                    placeholder="expiration (MM/YY)"
+                                    type="text" />
+                                <input
+                                    class="box"
+                                    name="Security code"
+                                    placeholder="Security code"
+                                    type="text" />
+                            </div>
+                            <input
+                                class="box"
+                                name="name on card"
+                                placeholder="name on card"
+                                type="text" />
+                        </div>
+                        <div class="email-me" style="width: 100%; margin-left: 20px">
+                            <div class="email-checkbox">
+                                <input type="checkbox" />
+                            </div>
+                            <label class="email"> Use shipping address as billing address</label>
+                        </div> -->
+                        <div class="Credit-card-cont pay">
+                            <input type="radio" name="PayOnDelivery" class="radio" checked/>
+                            <label class="Credit-card">الدفع عند الاستلام</label>
+                        </div>
+                    </div>
+                    <button class="pay-now">تأكيد الطلب</button>
+                </form>
+            </div>
+        </div>
+{% endblock content %}

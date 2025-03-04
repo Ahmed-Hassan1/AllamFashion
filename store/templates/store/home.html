@@ -7,7 +7,7 @@
 
     <div class="grid-container">
         {% for prod in products %}
-        <div class="product-card">
+        <div class="product-card" {% if prod.isSoldOut %} style="justify-content: flex-start;"  {% endif %}>
             <a href="{% url 'product' prod.slug %}" class="card-anchor">
                 <span class="visually-hidden">{{prod.name}}</span>
             </a>
@@ -19,7 +19,7 @@
             </div>
             <div class="overlay"></div>
             {% if prod.isSoldOut %}
-            <div class="sold-out">sold out</div>
+            <div class="sold-out">SOLD OUT</div>
             {% else %}
                 {% if prod.isOnSale %}
                 <div class="sale">SALE</div>
@@ -27,8 +27,8 @@
                 <div>
                     <div class="product-card-title">{{prod.name}}</div>
                     {% if prod.isOnSale %}
-                    <span class="price-item saleClass"> جم {{prod.SalePrice}} </span>
-                    <span class="price-item"> جم {{prod.price}} </span>
+                    <span class="price-item saleClass"> جم {{prod.price}} </span>
+                    <span class="price-item"> جم {{prod.SalePrice}} </span>
                     {% else %}
                     <span class="price-item"> جم {{prod.price}} </span>
                     {% endif %}
@@ -56,10 +56,22 @@
                         alt="{{prod.name}}" />
                 </div>
                 <div class="overlay"></div>
+                {% if prod.isSoldOut %}
+            <div class="sold-out" style="width: 70%;">SOLD OUT</div>
+            {% else %}
+                {% if prod.isOnSale %}
+                <div class="sale" style="width: 70%; margin-bottom: 10px;">SALE</div>
+                {% endif %}
                 <div>
                     <div class="product-card-title">{{prod.name}}</div>
+                    {% if prod.isOnSale %}
+                    <span class="price-item saleClass"> جم {{prod.price}} </span>
+                    <span class="price-item"> جم {{prod.SalePrice}} </span>
+                    {% else %}
                     <span class="price-item"> جم {{prod.price}} </span>
+                    {% endif %}
                 </div>
+            {% endif %}
             </div>
             {% endfor %}
         </div>

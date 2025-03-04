@@ -30,10 +30,22 @@
                     alt="{{prod.name}}" />
             </div>
             <div class="overlay"></div>
-            <div>
-                <div class="product-card-title">{{prod.name}}</div>
-                <span class="price-item"> جم {{prod.price}} </span>
-            </div>
+            {% if prod.isSoldOut %}
+            <div class="sold-out">SOLD OUT</div>
+            {% else %}
+                {% if prod.isOnSale %}
+                <div class="sale">SALE</div>
+                {% endif %}
+                <div>
+                    <div class="product-card-title">{{prod.name}}</div>
+                    {% if prod.isOnSale %}
+                    <span class="price-item saleClass"> جم {{prod.price}} </span>
+                    <span class="price-item"> جم {{prod.SalePrice}} </span>
+                    {% else %}
+                    <span class="price-item"> جم {{prod.price}} </span>
+                    {% endif %}
+                </div>
+            {% endif %}
         </div>
     {% endfor %}
 </div>

@@ -8,11 +8,11 @@
         <div>
             <h3>المنتج</h3>
         </div>
-        <div class="info">
+        <!-- <div class="info">
             <h3>سعر المنتج</h3>
             <h3>الكمية</h3>
             <h3>الاجمالى</h3>
-        </div>
+        </div> -->
     </div>
     {% for prod in orderitems%}
     <div class="cart-prduct-container">
@@ -22,7 +22,7 @@
             </div>
             <div class="cart-img-info">
                 <div>{{prod.product.name}}</div>
-                <p>المقاس</p>
+                <p>المقاس {{prod.size}}</p>
                 <!-- <a href="#" class="text-link-accent"> Remove </a> -->
                 <button type="submit" data-product="{{prod.product.id}}" data-action="remove" data-bs-toggle="modal" data-bs-target="#exampleModal" class="product-form-cart-submit update-cart">
                     Remove
@@ -30,12 +30,23 @@
             </div>
         </div>
         <div class="info">
-            <div class="cart-price">جم {{prod.product.price}}</div>
+            <div>
+                <h3>سعر المنتج</h3>
+                <div class="cart-price">جم {{prod.product.price}}</div>
+            </div>
+            
             <!-- <div>
                 <input class="cart-qty-input" type="number" value="{{prod.quantity}}" />
             </div> -->
-            <div>{{prod.quantity}}</div>
-            <div><span>جم {{prod.price}}</span></div>
+            <div>
+                <h3>الكمية</h3>
+                <div>{{prod.quantity}}</div>
+            </div>
+            <div>
+                <h3>الاجمالى</h3>
+                <div>جم {{prod.price}}</div>
+            </div>
+            
         </div>
     </div>
     {% endfor %}
@@ -58,12 +69,12 @@
     </div>
     <!-- <div class="cart-shipping">Tax included and shipping calculated at checkout</div> -->
     <div class="cartsubmit-controls">
-        <input type="submit" class="cart-submit" value="Check out" />
+        <a href="{% url 'checkout' %}" class="btn btn-danger">CHECK-OUT</a>
     </div>
-    <div class="cart-pay-option">
+    <!-- <div class="cart-pay-option">
         <img src="{% static 'images/visa.jpg' %}" alt="" />
         <img src="{% static 'images/instaPay.jpg' %}" alt="" />
         <img src="{% static 'images/cash.jpg' %}" alt="" />
-    </div>
+    </div> -->
 </div>
 {% endblock content %}

@@ -22,18 +22,21 @@
             {% endif %}
 
             {% if product.isOnSale %}
-            <span class="price-item saleClass"> جم {{product.SalePrice}} </span>
-            <span class="price-item"> جم {{product.price}} </span>
+            <span class="price-item"> جم {{product.SalePrice}} </span>
+            <span class="price-item saleClass"> جم {{product.price}} </span>
             {% else %}
             <span class="price-item"> جم {{product.price}} </span>
             {% endif %}
             <div class="product-form">
                 <div class="product-form-item">
                     <label style="font-size: 1.5rem;">المقاس</label>
-                    <select class="option-selector-product">
-                        <option value="sm" selected>s</option>
+                    <select class="option-selector-product" id="sizeOption">
+                        {% for size in sizes %}
+                        <!-- <option value="sm" selected>s</option>
                         <option value="lg">l</option>
-                        <option value="xlg">xl</option>
+                        <option value="xlg">xl</option> -->
+                        <option value="{{size.name}}">{{size.name}}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <!-- <div class="product-form-item">
@@ -65,14 +68,14 @@
                 </div>
             </div>
 
-            <button type="submit" aria-label="check out" class="product-form-cart-checkout">
+            <!-- <button type="submit" aria-label="check out" class="product-form-cart-checkout">
                 <span> Check Out </span>
-            </button>
-            <div class="pay-option">
+            </button> -->
+            <!-- <div class="pay-option">
                 <img src="{% static 'images/visa.jpg' %}" alt="" />
                 <img src="{% static 'images/instaPay.jpg' %}" alt="" />
                 <img src="{% static 'images/cash.jpg' %}" alt="" />
-            </div>
+            </div> -->
         {% endif %}
         
 
@@ -97,10 +100,22 @@
                     src="{{prod.image.url}}"
                     alt="{{prod.name}}" />
             </div>
-            <div>
-                <div class="product-card-title">{{prod.name}}</div>
-                <span class="price-item">جم {{prod.price}}</span>
-            </div>
+            {% if prod.isSoldOut %}
+            <div class="sold-out">SOLD OUT</div>
+            {% else %}
+                {% if prod.isOnSale %}
+                <div class="sale">SALE</div>
+                {% endif %}
+                <div>
+                    <div class="product-card-title">{{prod.name}}</div>
+                    {% if prod.isOnSale %}
+                    <span class="price-item saleClass"> جم {{prod.price}} </span>
+                    <span class="price-item"> جم {{prod.SalePrice}} </span>
+                    {% else %}
+                    <span class="price-item"> جم {{prod.price}} </span>
+                    {% endif %}
+                </div>
+            {% endif %}
         </div>
     {% endfor %}
 </div>
